@@ -36,6 +36,13 @@
   <dd>
     <img src="<%= @director.image_url %>" width="320">
   </dd>
+  
+  <dt>
+    Number of films
+  </dt>
+  <dd>
+    <%= Movie.where(director_id: @director.id).count %>
+  </dd>
 
 </dl>
 
@@ -48,3 +55,16 @@
 <a href="/directors">
   Go back
 </a>
+
+<div class="card mt-4">
+  <div class="card-header">
+    Filmography
+  </div>
+  <ul class="list-group list-group-flush">
+    <% Movie.where(director_id: @director.id).each do |movie| %>
+    <li class="list-group-item">
+      <a href="/movies/<%=@director.id%>"><%= movie.title%></a>
+    </li>
+    <%end%>
+  </ul>
+</div>
